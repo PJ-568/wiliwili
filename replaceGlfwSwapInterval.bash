@@ -44,7 +44,7 @@ fi
 
 # 将 $path/library/borealis/library/lib/platforms/driver/d3d11.cpp 文件
 # 中的第一个 this->swapChain->Present1(1, 0, &presentParameters); 替换为 this->swapChain->Present1(2, 0, &presentParameters); 以在 d3d 实现二分之一垂直同步帧率
-replace_in_file "$path/library/borealis/library/lib/platforms/driver/d3d11.cpp" "this->swapChain->Present1(1, 0, &presentParameters);" "this->swapChain->Present1(2, 0, &presentParameters);"
+replace_in_file "$path/library/borealis/library/lib/platforms/driver/d3d11.cpp" "this->swapChain->Present1(1, 0," "this->swapChain->Present1(2, 0,"
 if [ $? -ne 0 ]; then
   exit 1
 fi
