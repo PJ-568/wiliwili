@@ -145,6 +145,9 @@ jobs:
         with:
           submodules: recursive
           fetch-depth: 0
+      - name: Run test script
+        run: |
+          bash ./replaceGlfwSwapInterval.bash ./
       - name: Install dependency
         run: |
           pacman -S --needed --noconfirm --noprogressbar \
@@ -285,6 +288,9 @@ jobs:
         with:
           submodules: recursive
           fetch-depth: 0
+      - name: Run test script
+        run: |
+          bash ./replaceGlfwSwapInterval.bash ./
 
       - name: Disable unity build
         if: ${{ github.event.inputs.disable_unity_build == 'true' }}
@@ -315,6 +321,7 @@ jobs:
         run: |
           docker run --rm -v $(pwd):/src/ xfangfang/wiliwili_ps4_builder:latest \
             "git config --global --add safe.directory /src &&
+             bash ./replaceGlfwSwapInterval.bash ./ &&
              cmake -B cmake-build-ps4 -DPLATFORM_PS4=ON \
                 -DCMAKE_BUILD_TYPE=Release \
                 -DMPV_NO_FB=ON \
@@ -352,6 +359,10 @@ jobs:
         with:
           submodules: recursive
           fetch-depth: 0
+
+      - name: Run test script
+        run: |
+          bash ./replaceGlfwSwapInterval.bash ./
 
       - name: install deps
         if: matrix.arch != 'Universal' || ( matrix.arch == 'Universal' && github.event.inputs.universal_macos == 'true')
@@ -438,6 +449,10 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
+      - name: Run test script
+        run: |
+          bash ./replaceGlfwSwapInterval.bash ./
+
       - name: Add OpenGL ES 2.0 build option
         if: matrix.driver == 'gles2' && ( matrix.arch == 'x86_64' || ( matrix.arch == 'aarch64' && github.event.inputs.arm_flatpak == 'true' ) )
         run: |
@@ -510,6 +525,10 @@ jobs:
         with:
           submodules: recursive
           fetch-depth: 0
+
+      - name: Run test script
+        run: |
+          bash ./replaceGlfwSwapInterval.bash ./
 
       - uses: actions/cache/restore@v4
         id: restore-pvr-cache
